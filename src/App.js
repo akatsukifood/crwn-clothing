@@ -17,7 +17,7 @@ class App extends React.Component {
   unsubscribeFromAuth = null;
 
   componentDidMount() {
-
+    // On destructure pour récupérer setCurrentUser depuis les props de App, récupéré grâce à mapDispatchToProps
     const { setCurrentUser } = this.props;
 
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => {
@@ -62,6 +62,7 @@ class App extends React.Component {
 const mapStateToProps = ({ user }) => ({
   currentUser: user.currentUser
 })
+
 
 const mapDispatchToProps = dispatch => ({
   setCurrentUser: user => dispatch(setCurrentUser(user))

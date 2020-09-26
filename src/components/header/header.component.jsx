@@ -3,10 +3,14 @@ import React from 'react';
 import './header.styles.scss'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
 
 import { auth } from '../../firebase/firebase.utils'
 import CartIcon from '../cart-icon/cart-icon.component'
 import CartDropDown from '../cart-dropdown/cart-dropdown.component'
+import { selectCartHidden } from '../../redux/cart/cart.selectors'
+import { selectCurrentUser } from '../../redux/user/user.selectors'
+
 
 import { ReactComponent as Logo } from '../../assets/crown.svg'
 
@@ -36,17 +40,12 @@ const Header = ({ currentUser, hidden }) => (
     </div>
 );
 
-// const mapStateToProps = state => 
-// ({currentUser: state.user.currentUser})
 
-// mapStateToProps permet de filer à Header la partie du state du root-reducer qui nous intéresse, et ce sous forme de props.
-// C'est l'équivalent Redux du prop drilling. 
-// Sans Redux, on aurait mis des props dans le <Header/> du App.js
-// Ici c'est currentUser et hidden les 2 states du root-reducer qui nous intéressent, donc on va les isoler du reste
 
-const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
-    currentUser,
-    hidden
+
+const mapStateToProps = createStructuredSelector({
+    currentUser : selectCurrentUser,
+    hidden: selectCartHidden
 })
 
 
